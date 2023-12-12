@@ -1,0 +1,552 @@
+html,
+body {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        font-family: "Kanit"
+}
+
+:root {
+        --green: #158C53;
+        --blue: #2570B2;
+        --red: #B22525;
+        --black: #242424;
+        --mid-grey: #E3E3E3;
+        --light-grey: #F6F6F6;
+}
+
+body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+}
+
+/* Header Styles */
+
+.header {
+        width: 100%;
+}
+
+.header-content {
+        display: flex;
+        flex-shrink: 0;
+}
+
+.logo-container {
+        display: flex;
+        align-items: center;
+        padding-left: 11%;
+}
+
+.logo {
+        width: 7rem;
+        margin-top: 25px;
+}
+
+.navbar {
+        height: 67px;
+        margin-left: 6.7rem;
+        width: calc(89% - 6rem - 6.7rem);
+        background-color: var(--blue);
+        position: relative;
+        display: flex;
+        align-items: center;
+}
+
+.navbar:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--blue);
+        transform-origin: 48% 50%;
+        transform: skew(45deg) rotate(180deg);
+        z-index: -1;
+}
+
+.nav-item {
+        margin-left: 30px;
+        padding-left: 15px;
+        height: 38px;
+        background-color: white;
+        display: flex;
+        align-items: center;
+}
+
+.nav-button {
+        padding-right: 15px;
+        cursor: pointer;
+        margin-left: auto;
+        margin-right: 15%;
+}
+
+.hover-filter:hover {
+        filter: brightness(0.9);
+}
+
+.nav-search-input {
+        font-family: "Kanit";
+        font-size: 16px;
+        outline: none;
+        border: none;
+        margin-left: 10px;
+        width: 13.75rem;
+}
+
+.centre {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+}
+
+.input-button {
+        height: 100%;
+        width: 50px;
+        background-color: var(--mid-grey);
+        cursor: pointer;
+}
+
+.edit-icon {
+        display: none;
+}
+
+.mobile-nav {
+        display: none;
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        margin-left: -1rem;
+}
+
+
+/* Modal Styling */
+.modal-content,
+.btn {
+        border-radius: 0;
+
+}
+
+.modal-header {
+        border-bottom: none;
+}
+
+.modal-title {
+        display: flex;
+        width: 100%;
+        align-items: center;
+}
+
+.blue-modal {
+        background-color: var(--blue);
+        color: white;
+}
+
+.mobile-search {
+        display: flex !important;
+        margin-left: 0;
+        color: black;
+}
+
+.input-button-mobile {
+        margin-left: auto;
+}
+
+.mobile-edit-button {
+        display: flex !important;
+        color: black;
+        justify-content: center;
+        margin-left: auto;
+        font-size: 1rem;
+        margin-right: 5%;
+}
+
+
+/* Main Body Styles */
+.content-body {
+        width: 78%;
+        max-height: calc(100% - 67px - 50px);
+        margin-top: 50px;
+}
+
+.resorts-table {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        width: 100%;
+        min-height: 300px;
+        grid-gap: 2rem;
+        cursor: pointer;
+}
+
+.resorts-table:not(:first-of-type) {
+        margin-top: 2rem;
+}
+
+.resorts-text {
+        font-size: 20px;
+        padding-bottom: 0.8rem;
+}
+
+.resort-card {
+        display: flex;
+        background-size: cover;
+        background-repeat: no-repeat;
+        position: relative;
+        background-position: 50% 50%;
+        height: 300px;
+}
+
+.resorts {
+        height: 100%;
+        overflow: scroll;
+        padding-bottom: 1.5rem;
+}
+
+.resort-card-screen {
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0) 36%, rgba(0, 0, 0, 0.6657256652661064) 100%);
+        padding: 20px;
+        color: white;
+        display: flex;
+        position: absolute;
+        flex-direction: column;
+        justify-content: flex-end;
+        transition: all 0.2s ease-out;
+        border-bottom: 0px solid transparent;
+}
+
+.resort-card-screen:hover {
+        border-bottom: 7px solid var(--blue);
+}
+
+.resort-title {
+        font-size: 20px;
+        font-weight: 700;
+}
+
+.resort-tags {
+        display: flex;
+        align-items: center;
+}
+
+.tag-break {
+        width: 15px;
+}
+
+
+/* Resort Page */
+.resort-grid-body {
+        display: grid;
+        grid-template-columns: 2fr 5fr;
+        height: calc(100% - 67px - 50px);
+        /* background-color: red; */
+        grid-gap: 5rem;
+}
+
+.resort-profile {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 15rem;
+}
+
+.resort-image {
+        width: 15rem;
+        height: 15rem;
+        /* border: 0.5px solid rgb(59, 59, 59); */
+}
+
+.resort-tags {
+        font-size: 14px;
+}
+
+.resort-description {
+        font-size: 14px;
+        color: #747474;
+}
+
+.tracks-search {
+        background-color: var(--light-grey);
+        height: 3rem;
+        padding-left: 1.2rem;
+        display: flex;
+        align-items: center;
+}
+
+.search {
+        font-family: "Kanit";
+        font-size: 16px;
+        outline: none;
+        border: none;
+        margin-left: 1rem;
+        display: inline;
+        width: 100%;
+        background-color: transparent;
+}
+
+.tracks-list {
+        margin-top: 2.5rem;
+        width: 100%;
+        height: 500px;
+        min-height: calc(100% - 2.5rem - 3rem);
+        overflow: scroll;
+}
+
+::-webkit-scrollbar {
+        display: none;
+}
+
+.track {
+        background-color: var(--light-grey);
+        display: grid;
+        grid-template-columns: 48fr 17fr;
+}
+
+.track:not(:first-of-type) {
+        margin-top: 1.2rem;
+}
+
+.track-text {
+        width: 100%;
+        padding: 1.75rem;
+        padding-right: 2.5rem;
+}
+
+.track-title {
+        font-weight: 700;
+}
+
+.track-description {
+        font-size: 14px;
+}
+
+.track-info {
+        color: white;
+        font-size: 14px;
+        padding: 1.2rem 1.4rem;
+        display: grid;
+        grid-template-rows: repeat(3, 1fr);
+}
+
+.track-info>div {
+        display: flex;
+        align-items: center;
+}
+
+.track-info-bottom {
+        color: var(--mid-grey);
+}
+
+.piste-type {
+        font-weight: 700;
+}
+
+.slope-type {
+        margin-left: auto;
+}
+
+.green {
+        background-color: var(--green);
+}
+
+.blue {
+        background-color: var(--blue);
+}
+
+.red {
+        background-color: var(--red);
+}
+
+.black {
+        background-color: var(--black);
+}
+
+.tooltip {
+        --bs-tooltip-border-radius: 0px;
+        font-family: "Kanit";
+}
+
+@keyframes alertFadeOut {
+        0% {
+                opacity: 1;
+        }
+
+        50% {
+                opacity: 1;
+        }
+
+        65% {
+                opacity: 0;
+        }
+
+        70% {
+                opacity: 0;
+                display: none;
+        }
+
+        100% {
+                opacity: 0;
+                display: none;
+        }
+}
+
+@keyframes alertMoveIn {
+        from {
+                top: -100px;
+        }
+
+        to {
+                top: 10px;
+        }
+}
+
+.alert {
+        animation: alertMoveIn 0.3s ease-out forwards, alertFadeOut 4s forwards;
+        position: fixed;
+        padding: 15px 20px;
+        background-color: white;
+        border: none;
+        z-index: 999;
+        border-radius: 0px;
+        box-shadow: 0px 0px 65px -15px rgba(0, 0, 0, 1);
+}
+
+.alert-success {
+        border-left: 5px solid var(--green);
+        color: var(--green);
+}
+
+.alert-error {
+        border-left: 5px solid var(--red);
+        color: var(--red);
+}
+
+
+
+
+
+
+/* Responsive Code */
+
+@media only screen and (max-width: 1200px) {
+
+        /* Smaller desktop window */
+        .edit-icon {
+                display: block;
+        }
+
+        .edit-text {
+                display: none;
+        }
+
+        .nav-search-input {
+                width: 10rem;
+        }
+
+        .navbar:before {
+                transform-origin: 47% 50%;
+        }
+}
+
+@media only screen and (max-width: 1100px) {
+
+        /* Small desktop window */
+        .nav-search-input {
+                width: 8rem;
+        }
+}
+
+@media only screen and (max-width: 1000px) {
+
+        /* Small desktop window */
+        .nav-search-input {
+                width: 7.3rem;
+        }
+
+        .navbar:before {
+                transform-origin: 46% 50%;
+        }
+
+        .nav-search:first-of-type {
+                margin-left: -0.3rem;
+        }
+
+}
+
+@media only screen and (max-width: 940px) {
+
+        /* Mobile device / tablet */
+        .mobile-nav {
+                display: flex;
+        }
+
+        .nav-item {
+                display: none;
+        }
+
+        .navbar {
+                cursor: pointer;
+        }
+
+        .navbar:hover {
+                filter: brightness(0.9);
+        }
+
+        .resorts-table {
+                grid-template-columns: 1fr;
+                height: 600px;
+        }
+
+        .resort-card-screen {
+                background: linear-gradient(180deg, rgba(255, 255, 255, 0) -20%, rgba(0, 0, 0, 0.6657256652661064) 100%);
+        }
+}
+
+@media only screen and (max-width: 750px) {
+
+        /* Mobile device / tablet */
+        .mobile-nav {
+                display: flex;
+        }
+
+        .nav-item {
+                display: none;
+        }
+
+        .navbar {
+                cursor: pointer;
+        }
+
+        .navbar:before {
+                transform-origin: 43% 50%;
+        }
+
+}
+
+@media only screen and (max-width: 600px) {
+
+        /* Mobile device / tablet */
+        .mobile-nav {
+                display: flex;
+        }
+
+        .nav-item {
+                display: none;
+        }
+
+        .navbar {
+                cursor: pointer;
+        }
+
+        .navbar:before {
+                transform-origin: 35% 50%;
+        }
+
+}

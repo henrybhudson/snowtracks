@@ -1,0 +1,42 @@
+{
+        "tracks": [
+                {
+                        "id": 1,
+                        "name": "Chaux Ronde",
+                        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque dui sed feugiat posuere.",
+                        "piste": "On-Piste",
+                        "slope": "Blue",
+                        "length_km": 1.5,
+                        "time_mins": 10,
+                        "features": [
+                                "Snow Park",
+                                "Refreshments",
+                                "Multiple Routes",
+                                "Slalom"
+                        ]
+                },
+                {
+                        "id": 2,
+                        "name": "Lac Noir",
+                        "description": "Impedit error, nam adipisci sequi, sit qui temporibus debitis numquam dolorem, et praesentium.",
+                        "piste": "On-Piste",
+                        "slope": "Blue",
+                        "length_km": 1.1,
+                        "time_mins": 5,
+                        "features": [
+                                "Refreshments",
+                                "Slalom"
+                        ]
+                },
+                {
+                        "id": 3,
+                        "name": "La Rasse",
+                        "description": "Etiam vitae lectus lobortis, aliquam eros in, lacinia tellus. Mauris porttitor maximus orci mollis tincidunt. Proin sodales purus vel aliquet mattis.",
+                        "piste": "On-Piste",
+                        "slope": "Red",
+                        "length_km": 1.8,
+                        "time_mins": 12,
+                        "features": []
+                }
+        ]
+}

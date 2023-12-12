@@ -1,0 +1,26 @@
+{
+        "resorts": [
+                {
+                        "id": 1,
+                        "name": "Villars-sur-Ollon",
+                        "country": "Switzerland",
+                        "airport": "GVA",
+                        "description": "Provident enim iusto nihil vel et a ex facere quam id esse ut dolores incidunt, quo ipsa aliquam atque nesciunt natus omnis optio quidem placeat distinctio totam reiciendis. Culpa ullam perferendis, dolor reprehenderit enim mollitia esse eum ex cumque dolores natus illo expedita ea ratione impedit, deserunt at.",
+                        "tracks": [
+                                1,
+                                2,
+                                3
+                        ]
+                },
+                {
+                        "id": 2,
+                        "name": "Les 3 Vallées",
+                        "country": "France",
+                        "airport": "CMF",
+                        "description": "Sequi soluta odit maxime voluptas corporis tempore eum incidunt dolor aut ipsa, dicta pariatur ad excepturi a officiis consequatur placeat recusandae dolores earum sapiente veritatis ullam nihil? Culpa odio amet rerum tenetur.",
+                        "tracks": [
+                                1
+                        ]
+                }
+        ]
+}
