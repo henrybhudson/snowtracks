@@ -14,7 +14,7 @@ const displayResorts = (resorts) => {
                 element.className = "resort-card";
                 element.style.backgroundImage = `url(../assets/resorts/${imageName}.png)`;
                 element.innerHTML = `
-                <div class="resort-card-screen" id="${resort.id}">
+                <div class="resort-card-screen" id="${resort.id}" onclick="document.location.href='/resort/?id=${resort.id}';">
                         <div class="resort-title">${resort.name}</div>
                         <div class="resort-tags">
                                 <i class="fa fa-location-pin"></i>&nbsp;&nbsp;${resort.country}

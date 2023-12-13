@@ -27,7 +27,7 @@ app.get('/api/resorts', async (req, res) => {
         var resorts;
 
         if (search) {
-                resorts = await getResortsByName(search);
+                resorts = await getDataByName('resorts', search);
         } else {
                 resorts = await getResorts();
         }
@@ -45,7 +45,20 @@ app.get('/api/resort', async (req, res) => {
         } else {
                 res.status(404).json({ "message": "Resort Not Found" })
         }
-})
+});
+
+app.get('/api/tracks', async (req, res) => {
+        const search = req.query.search;
+        var tracks;
+
+        if (search) {
+                tracks = await getDataByName('tracks', search);
+        } else {
+                tracks = await getTracks();
+        }
+
+        res.json({ tracks });
+});
 
 app.post('/api/resort', (req, res) => {
         const resortData = req.body;
@@ -72,7 +85,7 @@ const getResort = async (id) => {
         const resort = resorts.find(resort => resort.id == id)
 
         const tracksList = resort.tracks;
-        resort.tracks = await getTracks(tracksList);
+        resort.tracks = await getTracks(false, tracksList);
 
         return resort;
 };
@@ -83,27 +96,52 @@ const getResorts = async () => {
         return jsonData.resorts;
 };
 
-const getResortsByName = async (search) => {
-        const jsonData = await getJSONData('resorts');
-        const resortsList = jsonData.resorts;
+// Reused for tracks and resorts, depending on input
+// Performs searching functionality
+const getDataByName = async (type, search) => {
+        var dataList;
 
-        // Filter resorts
-        const matchedResorts = resortsList.filter((resort) => {
+        switch (type) {
+                case 'resorts':
+                        dataList = await getResorts();
+                        break;
+                case 'tracks':
+                        dataList = await getTracks();
+                        break;
+        }
+
+        // Filter data
+        const matchedData = dataList.filter((data) => {
                 // Convert both to uppercase to ensure not case sensitive
-                return resort.name.toUpperCase().includes(search.toUpperCase());
+                return data.name.toUpperCase().includes(search.toUpperCase());
         });
 
-        return matchedResorts;
+        return matchedData;
 }
 
 // Function to get the list of all tracks from the JSON file
-const getTracks = async (tracksList) => {
+const getTracks = async (all = true, tracksList = []) => {
         const jsonData = await getJSONData('tracks');
         const tracksArray = jsonData.tracks;
 
-        const matchedTracks = tracksArray.filter((track) => {
-                return tracksList.includes(track.id);
-        });
+        var matchedTracks;
+
+        const resorts = await getResorts();
+
+        for (let i = 0; i < tracksArray.length; i++) {
+                const track = tracksArray[i];
+                const resort = resorts.find(resort => resort.id == track.resort);
+                tracksArray[i].resort = resort.name;
+        }
+
+        matchedTracks = tracksArray;
+
+        if (!all) {
+                // We're not fetching all tracks, so filter them
+                matchedTracks = tracksArray.filter((track) => {
+                        return tracksList.includes(track.id);
+                });
+        }
 
         return matchedTracks;
 };

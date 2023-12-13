@@ -12,7 +12,9 @@ body {
         --blue: #2570B2;
         --red: #B22525;
         --black: #242424;
+        --dark-grey: #A9A9A9;
         --mid-grey: #E3E3E3;
+        --mid-light-grey: #ECECEC;
         --light-grey: #F6F6F6;
 }
 
@@ -280,6 +282,11 @@ body {
         align-items: center;
 }
 
+.search-small {
+        margin-top: 1rem;
+        height: 2.5rem;
+}
+
 .search {
         font-family: "Kanit";
         font-size: 16px;
@@ -307,10 +314,31 @@ body {
         background-color: var(--light-grey);
         display: grid;
         grid-template-columns: 48fr 17fr;
+        position: relative;
 }
 
 .track:not(:first-of-type) {
         margin-top: 1.2rem;
+}
+
+.big-track {
+        grid-template-columns: 24fr 5fr;
+}
+
+.track-resort {
+        padding: 0.1rem 0.5rem;
+        background-color: var(--mid-grey);
+        font-size: 12px;
+        position: absolute;
+        top: 0;
+        left: 1.75rem;
+        font-weight: normal;
+        display: flex;
+        align-items: center;
+}
+
+.track-resort>i {
+        font-size: 10px;
 }
 
 .track-text {
@@ -321,6 +349,10 @@ body {
 
 .track-title {
         font-weight: 700;
+}
+
+.new-track-title {
+        font-weight: 500;
 }
 
 .track-description {
@@ -428,10 +460,142 @@ body {
         color: var(--red);
 }
 
+.admin-panel {
+        margin-top: 2.2rem;
+        width: 100%;
+        height: 500px;
+        border: 1px solid var(--mid-grey);
+        border-left: 3px solid var(--blue);
+}
 
+.admin-form {
+        height: 100%;
+        width: 100%;
+        display: grid;
+        grid-template-columns: 29fr 90fr;
+}
 
+textarea {
+        resize: none;
+        font-size: 14px;
+        width: 100%;
+}
 
+.left-panel {
+        padding: 1.5rem;
+        border-right: 1px solid var(--mid-grey);
+}
 
+.right-panel {
+        padding: 1.5rem;
+}
+
+.right-panel-header {
+        width: 100%;
+        display: flex;
+        align-items: center;
+}
+
+.add-track-btn {
+        padding: 2px 12px;
+        font-size: 14px;
+        border: 1px solid black;
+        margin-left: auto;
+        background-color: white;
+        cursor: pointer;
+}
+
+.input-tag {
+        font-size: 14px;
+        color: var(--dark-grey);
+}
+
+.admin-input {
+        border: none;
+        outline: none;
+        border-radius: 0px;
+        border: 1px solid transparent;
+}
+
+.admin-input:focus {
+        border: 1px solid black;
+}
+
+.input-tag:not(:first-of-type) {
+        margin-top: 1.5rem;
+}
+
+.image-input {
+        font-size: 14px;
+        width: 100%;
+        margin-top: 5px;
+}
+
+.new-tracks-list {
+        margin-top: 1rem;
+        height: calc(100% - 9rem);
+        background-color: var(--light-grey);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem;
+}
+
+.smalltext {
+        font-size: 14px;
+        color: var(--dark-grey);
+}
+
+.new-track {
+        background-color: var(--light-grey);
+        padding: 1.5rem;
+        width: 100%;
+}
+
+.new-track:not(:first-of-type) {
+        margin-top: 0.6rem;
+}
+
+.new-track-tags {
+        display: flex;
+}
+
+.tag {
+        padding: 0px 12px;
+}
+
+.slope-tag {
+        color: white;
+        font-size: 12px;
+        border: 1px solid transparent;
+}
+
+.piste-tag {
+        background-color: var(--mid-grey);
+        font-size: 12px;
+        margin-left: 0.6rem;
+        border: 1px solid var(--dark-grey);
+}
+
+.new-track-green {
+        border-left: 2px solid var(--green);
+        background-color: #158C531a;
+}
+
+.new-track-blue {
+        border-left: 2px solid var(--blue);
+        background-color: #2570b21a;
+}
+
+.new-track-red {
+        border-left: 2px solid var(--red);
+        background-color: #B225251a;
+}
+
+.new-track-black {
+        border-left: 2px solid var(--black);
+        background-color: #2424241a;
+}
 
 /* Responsive Code */
 

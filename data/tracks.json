@@ -6,6 +6,7 @@
                         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque dui sed feugiat posuere.",
                         "piste": "On-Piste",
                         "slope": "Blue",
+                        "resort": 1,
                         "length_km": 1.5,
                         "time_mins": 10,
                         "features": [
@@ -21,6 +22,7 @@
                         "description": "Impedit error, nam adipisci sequi, sit qui temporibus debitis numquam dolorem, et praesentium.",
                         "piste": "On-Piste",
                         "slope": "Blue",
+                        "resort": 1,
                         "length_km": 1.1,
                         "time_mins": 5,
                         "features": [
@@ -31,11 +33,23 @@
                 {
                         "id": 3,
                         "name": "La Rasse",
-                        "description": "Etiam vitae lectus lobortis, aliquam eros in, lacinia tellus. Mauris porttitor maximus orci mollis tincidunt. Proin sodales purus vel aliquet mattis.",
+                        "description": "Etiam vitae lectus lobortis, aliquam eros in, lacinia tellus. Mauris porttitor maximus orci mollis tincidunt. Proin sodales purus vel.",
                         "piste": "On-Piste",
                         "slope": "Red",
+                        "resort": 1,
                         "length_km": 1.8,
                         "time_mins": 12,
+                        "features": []
+                },
+                {
+                        "id": 4,
+                        "name": "Grand Couloir",
+                        "description": "Aliquam pretium, libero id viverra suscipit, tortor nunc euismod diam, eu commodo mi urna at nibh. Cras ut pellentesque ante.",
+                        "piste": "On-Piste",
+                        "slope": "Black",
+                        "resort": 2,
+                        "length_km": 0.4,
+                        "time_mins": 4,
                         "features": []
                 }
         ]

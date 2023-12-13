@@ -42,7 +42,7 @@ export const getResortAndTracks = async () => {
                         throw Error;
                 }
 
-                AppAlert('success', 'Found the resort.')
+                // AppAlert('success', 'Found the resort.')
                 return data;
         } catch (e) {
                 AppAlert('error', 'Could not find resort.')
@@ -51,7 +51,7 @@ export const getResortAndTracks = async () => {
 }
 
 export const getTracks = async () => {
-        var search = parseInt(new URLSearchParams(window.location.search).get('search'));
+        var search = new URLSearchParams(window.location.search).get('search');
 
         if (search) {
                 // Set the page header text to explain that results have been filtered
@@ -66,8 +66,9 @@ export const getTracks = async () => {
                 const data = await response.json();
                 const tracks = data.tracks;
 
-                // AppAlert('success', 'Found all resorts.')
                 console.log(tracks)
+
+                // AppAlert('success', 'Found all resorts.')
                 return tracks;
         } catch (e) {
                 AppAlert('error', 'Could not find tracks.')
@@ -84,4 +85,14 @@ document.querySelector('#resorts-search-btn').addEventListener('click', () => {
 document.querySelector('#mobile-resorts-btn').addEventListener('click', () => {
         const searchValue = document.querySelector('#mobile-resorts-input').value.trim();
         document.location.href = `/?search=${searchValue}`;
+})
+
+document.querySelector('#tracks-search-btn').addEventListener('click', () => {
+        const searchValue = document.querySelector('#tracks-search-input').value.trim();
+        document.location.href = `/tracks/?search=${searchValue}`;
+})
+
+document.querySelector('#mobile-tracks-btn').addEventListener('click', () => {
+        const searchValue = document.querySelector('#mobile-tracks-input').value.trim();
+        document.location.href = `/tracks/?search=${searchValue}`;
 })
