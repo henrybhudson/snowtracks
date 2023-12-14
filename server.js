@@ -85,6 +85,9 @@ app.post('/api/resort', async (req, res) => {
         try {
                 await addResort(resortData);
                 await addTracks(newTracks);
+                res.status(200).json({
+                        status: "success"
+                });
         } catch {
                 res.status(400);
         }
@@ -121,8 +124,13 @@ const getResort = async (id) => {
         const resorts = await getResorts();
         const resort = resorts.find(resort => resort.id == id)
 
-        const tracksList = resort.tracks;
-        resort.tracks = await getTracks(false, tracksList);
+
+        try {
+                const tracksList = resort.tracks;
+                resort.tracks = await getTracks(false, tracksList);
+        } catch (err) {
+                return null;
+        }
 
         return resort;
 };

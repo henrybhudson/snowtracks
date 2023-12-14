@@ -36,8 +36,6 @@ export const getResortAndTracks = async () => {
                 const response = await fetch(`http://127.0.0.1:8090/api/resort/?id=${id}`);
                 const data = await response.json();
 
-                console.log(data);
-
                 if (response.status != 200) {
                         throw Error;
                 }
@@ -87,9 +85,6 @@ export const addResort = async (resort) => {
                         },
                 });
 
-                const status = await response.json();
-
-                // AppAlert('success', 'Found all resorts.')
                 return true;
         } catch (e) {
                 AppAlert('error', 'Could not add resort.')
@@ -118,6 +113,10 @@ document.querySelector('#mobile-tracks-btn').addEventListener('click', () => {
 });
 
 document.querySelector('#edit-tracks-btn').addEventListener('click', () => {
+        document.location.href = '/admin/';
+});
+
+document.querySelector('#mobile-edit-btn').addEventListener('click', () => {
         document.location.href = '/admin/';
 });
 

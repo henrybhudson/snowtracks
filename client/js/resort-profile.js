@@ -9,6 +9,8 @@ const displayResort = (resort) => {
         document.querySelector('.resort-airport').textContent = resort.airport;
         document.querySelector('.resort-description').textContent = resort.description;
 
+        document.querySelector('#track-search').setAttribute('placeholder', `Search tracks in ${resort.name}...`);
+
         const resortImage = resort.name.replaceAll(' ', '-');
         document.querySelector('.resort-image').setAttribute('src', `../assets/resorts/${resortImage}.png`)
 
