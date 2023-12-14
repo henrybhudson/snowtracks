@@ -39,8 +39,9 @@
                                                 placeholder="Search tracks..."></input>
                                         <div class="input-button centre hover-filter" id="tracks-search-btn">Go</div>
                                 </div>
-                                <div class="nav-item nav-button hover-filter"><span class="edit-icon"><i
-                                                        class="fa fa-pencil"></i></span><span class="edit-text">Edit
+                                <div class="nav-item nav-button hover-filter" id="edit-tracks-btn"><span
+                                                class="edit-icon"><i class="fa fa-pencil"></i></span><span
+                                                class="edit-text">Edit
                                                 Tracks</span>
                                 </div>
                                 <div class="mobile-nav" data-bs-toggle="modal" data-bs-target="#searchModal">
@@ -58,25 +59,28 @@
                         <div class="admin-panel">
                                 <form class="admin-form">
                                         <div class="left-panel">
-                                                <div class="input-tag">Resort Name</div>
-                                                <input class="admin-input" placeholder="Enter name" type="text"
-                                                        required>
-                                                <div class="input-tag">Country</div>
-                                                <input class="admin-input" placeholder="e.g. France" type="text"
-                                                        required>
-                                                <div class="input-tag">Nearest Airport Code</div>
-                                                <input class="admin-input" placeholder="e.g. GVA" type="text" required>
-                                                <div class="input-tag">Short Description</div>
-                                                <textarea class="admin-input" placeholder="A few sentences" type="text"
-                                                        rows="5" required></textarea>
-                                                <div class="input-tag">Resort Cover Image</div>
+                                                <div class="label">Resort Name</div>
+                                                <input class="admin-input" id="resort-name" placeholder="Enter name"
+                                                        type="text" required>
+                                                <div class="label">Country</div>
+                                                <input class="admin-input" id="resort-country" placeholder="e.g. France"
+                                                        type="text" required>
+                                                <div class="label">Nearest Airport Code</div>
+                                                <input class="admin-input" id="resort-airport" placeholder="e.g. GVA"
+                                                        type="text" required>
+                                                <div class="label">Short Description</div>
+                                                <textarea class="admin-input" id="resort-description"
+                                                        placeholder="A few sentences" type="text" rows="5"
+                                                        required></textarea>
+                                                <div class="label">Resort Cover Image</div>
                                                 <input class="image-input" type="file" id="avatar" name="avatar"
                                                         accept="image/png" required />
                                         </div>
                                         <div class="right-panel">
                                                 <div class="right-panel-header">
                                                         Tracks
-                                                        <div class="add-track-btn hover-filter">
+                                                        <div class="add-track-btn hover-filter" data-bs-toggle="modal"
+                                                                data-bs-target="#trackModal">
                                                                 Add Track
                                                         </div>
                                                 </div>
@@ -86,21 +90,10 @@
                                                                 placeholder="Search added tracks...">
                                                 </div>
                                                 <div class="new-tracks-list">
-                                                        <!-- <div class="smalltext">No tracks added</div> -->
-                                                        <div class="new-track new-track-blue">
-                                                                <div class="new-track-title">Chaux Ronde</div>
-                                                                <div class="new-track-tags">
-                                                                        <div class="tag slope-tag blue">Blue</div>
-                                                                        <div class="tag piste-tag">On-Piste</div>
-                                                                </div>
-                                                        </div>
-                                                        <div class="new-track new-track-red">
-                                                                <div class="new-track-title">La Rasse</div>
-                                                                <div class="new-track-tags">
-                                                                        <div class="tag slope-tag red">Red</div>
-                                                                        <div class="tag piste-tag">On-Piste</div>
-                                                                </div>
-                                                        </div>
+                                                        <div class="smalltext">No tracks added</div>
+                                                </div>
+                                                <div class="confirm-resort-btn hover-filter" type="submit"><i
+                                                                class="fa fa-check"></i>&nbsp;&nbsp;Confirm New Resort
                                                 </div>
                                         </div>
                                 </form>
@@ -108,8 +101,94 @@
                 </div>
         </div>
 
-        <!-- Modal -->
-        <div class=" modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+        <!-- Modals -->
+
+        <div class="modal fade" id="trackModal" tabindex="-1" aria-labelledby="trackModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                        <div class="modal-content blue-modal">
+                                <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="trackModalLabel">
+                                                Add a new track
+                                        </h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                </div>
+                                <form id="new-track-form">
+                                        <div class="modal-body">
+                                                <div class="modal-label">
+                                                        Track Name
+                                                </div>
+                                                <input class="new-track-input" id="track-name-input"
+                                                        placeholder="Enter track name..." required></input>
+                                                <div class="modal-label">
+                                                        Difficulty Level
+                                                </div>
+                                                <select id="difficulty-select" required>
+                                                        <option selected disabled hidden>Select...</option>
+                                                        <option value="Green">Green (Beginner)</option>
+                                                        <option value="Blue">Blue (Intermediate)</option>
+                                                        <option value="Red">Red (Advanced)</option>
+                                                        <option value="Black">Black (Expert)</option>
+                                                </select>
+                                                <div class="modal-label">
+                                                        Piste Type
+                                                </div>
+                                                <select id="piste-select" required>
+                                                        <option selected disabled hidden>Select...</option>
+                                                        <option value="On-Piste">On-Piste</option>
+                                                        <option value="Off-Piste">Off-Piste</option>
+                                                </select>
+                                                <div class="modal-label">
+                                                        Description
+                                                </div>
+                                                <textarea class="new-track-input" id="track-description-input"
+                                                        placeholder="Enter a short description..." rows="5"
+                                                        required></textarea>
+
+                                                <div class="input-group">
+                                                        <div>
+                                                                <div class="modal-label">
+                                                                        Distance (km)
+                                                                </div>
+                                                                <input class="new-track-input" id="track-length-input"
+                                                                        placeholder="Track distance (km)..."
+                                                                        required></input>
+                                                        </div>
+                                                        <div>
+                                                                <div class="modal-label">
+                                                                        Time (minutes)
+                                                                </div>
+                                                                <input class="new-track-input" id="track-time-input"
+                                                                        placeholder="Track duration (mins)..."
+                                                                        required></input>
+                                                        </div>
+                                                </div>
+
+                                                <div class="modal-label">Track Features</div>
+                                                <div class="track-features">
+                                                        <div class="feature hover-filter" value="Multiple Routes">
+                                                                Multiple Routes</div>
+                                                        <div class="feature hover-filter" value="Snow Park">Snow Park
+                                                        </div>
+                                                        <div class="feature hover-filter" value="Refreshments">
+                                                                Refreshments</div>
+                                                        <div class="feature hover-filter" value="Slalom">Slalom</div>
+                                                </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                                <div class="confirm-track-btn hover-filter" data-bs-dismiss="modal"
+                                                        type="submit">
+                                                        <i class="fa fa-check"></i>&nbsp;&nbsp;Confirm Track
+                                                </div>
+                                        </div>
+                                </form>
+                        </div>
+                </div>
+        </div>
+        </div>
+
+
+        <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                         <div class="modal-content blue-modal">
                                 <div class="modal-header">

@@ -285,6 +285,8 @@ body {
 .search-small {
         margin-top: 1rem;
         height: 2.5rem;
+        margin: 1rem 1.5rem 0 1.5rem;
+        width: calc(100% - 3rem);
 }
 
 .search {
@@ -462,17 +464,16 @@ body {
 
 .admin-panel {
         margin-top: 2.2rem;
-        width: 100%;
-        height: 500px;
-        border: 1px solid var(--mid-grey);
-        border-left: 3px solid var(--blue);
 }
 
 .admin-form {
-        height: 100%;
+        height: 500px;
         width: 100%;
         display: grid;
         grid-template-columns: 29fr 90fr;
+        border: 1px solid var(--mid-grey);
+        border-left: 3px solid var(--blue);
+        overflow: hidden;
 }
 
 textarea {
@@ -484,16 +485,19 @@ textarea {
 .left-panel {
         padding: 1.5rem;
         border-right: 1px solid var(--mid-grey);
+        height: 500px;
 }
 
 .right-panel {
-        padding: 1.5rem;
+        height: 500px;
+        position: relative;
 }
 
 .right-panel-header {
-        width: 100%;
+        width: calc(100% - 3rem);
         display: flex;
         align-items: center;
+        margin: 1.5rem 1.5rem 0 1.5rem;
 }
 
 .add-track-btn {
@@ -505,7 +509,7 @@ textarea {
         cursor: pointer;
 }
 
-.input-tag {
+.label {
         font-size: 14px;
         color: var(--dark-grey);
 }
@@ -521,7 +525,7 @@ textarea {
         border: 1px solid black;
 }
 
-.input-tag:not(:first-of-type) {
+.label:not(:first-of-type) {
         margin-top: 1.5rem;
 }
 
@@ -532,13 +536,36 @@ textarea {
 }
 
 .new-tracks-list {
-        margin-top: 1rem;
-        height: calc(100% - 9rem);
+        margin: 1rem 1.5rem 0 1.5rem;
+        height: 60%;
         background-color: var(--light-grey);
         display: flex;
         flex-direction: column;
         align-items: center;
         padding: 1rem;
+        overflow: scroll;
+}
+
+.confirm-track-btn,
+.confirm-resort-btn {
+        font-size: 14px;
+        margin-left: auto;
+        background-color: white;
+        cursor: pointer;
+        color: black;
+}
+
+.confirm-resort-btn {
+        padding: 2px 12px;
+        position: absolute;
+        bottom: 1.5rem;
+        right: 1.5rem;
+        border: 1px solid black;
+}
+
+.confirm-track-btn {
+        padding: 4px 12px;
+        font-size: 16px;
 }
 
 .smalltext {
@@ -577,6 +604,15 @@ textarea {
         border: 1px solid var(--dark-grey);
 }
 
+.new-track-content {
+        margin-top: 0.6rem;
+        font-size: 14px;
+}
+
+.new-track-content>.label {
+        margin-top: 0.4rem;
+}
+
 .new-track-green {
         border-left: 2px solid var(--green);
         background-color: #158C531a;
@@ -595,6 +631,72 @@ textarea {
 .new-track-black {
         border-left: 2px solid var(--black);
         background-color: #2424241a;
+}
+
+.modal-label {
+        font-size: 14px;
+}
+
+.modal-label:not(:first-of-type) {
+        margin-top: 1rem;
+}
+
+.new-track-input {
+        outline: none;
+        border: none;
+        width: 100%;
+        padding: 6px 12px;
+        margin-top: 5px;
+}
+
+select {
+        margin-top: 5px;
+        width: 100%;
+        text-indent: 10px;
+        border-radius: 0px;
+        border: none;
+        outline: none;
+}
+
+.input-group {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 1rem;
+}
+
+.input-group>div>.modal-label {
+        margin-top: 0.6rem;
+}
+
+.track-features {
+        display: flex;
+        width: 100%;
+        margin-top: 5px;
+}
+
+.feature {
+        padding: 2px 6px;
+        background-color: var(--blue);
+        border: 1px solid white;
+        cursor: pointer;
+        user-select: none;
+}
+
+.feature:not(:first-of-type) {
+        margin-left: 0.5rem;
+}
+
+.feature-selected {
+        color: white;
+        background-color: var(--blue);
+        border: 1px solid transparent;
+        background-color: white;
+        color: black;
+}
+
+.modal-footer {
+        border-top: none;
 }
 
 /* Responsive Code */

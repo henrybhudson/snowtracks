@@ -77,22 +77,50 @@ export const getTracks = async () => {
 
 }
 
+export const addResort = async (resort) => {
+        try {
+                const response = await fetch(`http://127.0.0.1:8090/api/resort/`, {
+                        method: 'POST',
+                        body: JSON.stringify(resort),
+                        headers: {
+                                'content-type': 'application/json'
+                        },
+                });
+
+                const status = await response.json();
+
+                // AppAlert('success', 'Found all resorts.')
+                return true;
+        } catch (e) {
+                AppAlert('error', 'Could not add resort.')
+                return false;
+        }
+};
+
 document.querySelector('#resorts-search-btn').addEventListener('click', () => {
         const searchValue = document.querySelector('#resorts-search-input').value.trim();
         document.location.href = `/?search=${searchValue}`;
-})
+});
 
 document.querySelector('#mobile-resorts-btn').addEventListener('click', () => {
         const searchValue = document.querySelector('#mobile-resorts-input').value.trim();
         document.location.href = `/?search=${searchValue}`;
-})
+});
 
 document.querySelector('#tracks-search-btn').addEventListener('click', () => {
         const searchValue = document.querySelector('#tracks-search-input').value.trim();
         document.location.href = `/tracks/?search=${searchValue}`;
-})
+});
 
 document.querySelector('#mobile-tracks-btn').addEventListener('click', () => {
         const searchValue = document.querySelector('#mobile-tracks-input').value.trim();
         document.location.href = `/tracks/?search=${searchValue}`;
-})
+});
+
+document.querySelector('#edit-tracks-btn').addEventListener('click', () => {
+        document.location.href = '/admin/';
+});
+
+document.querySelector('.logo-container').addEventListener('click', () => {
+        document.location.href = '/';
+});

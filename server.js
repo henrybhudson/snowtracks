@@ -1,9 +1,14 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const app = express();
 const fs = require('fs/promises');
 const path = require('path');
 
-
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({
+        extended: true
+}));
+app.use(express.json());
 /*
 TODO:
 So we have some API calls that SHOULD WORK.
@@ -60,15 +65,34 @@ app.get('/api/tracks', async (req, res) => {
         res.json({ tracks });
 });
 
-app.post('/api/resort', (req, res) => {
+app.post('/api/resort', async (req, res) => {
         const resortData = req.body;
-        resortData.id = 1;
+        const resorts = await getResorts();
+        const tracks = await getTracks();
+
+        // add track IDs and resortIDs
+        resortData.id = resorts.length + 1;
+        const newTracks = resortData.tracks.slice();
+
+        // console.log(newTracks)
+
+        for (let i = 0; i < newTracks.length; i++) {
+                newTracks[i].id = tracks.length + i + 1;
+                newTracks[i].resort = resortData.id;
+                resortData.tracks[i] = newTracks[i].id;
+        }
+
+        try {
+                await addResort(resortData);
+                await addTracks(newTracks);
+        } catch {
+                res.status(400);
+        }
 });
 
+// Add new resort to JSON file
 const addResort = async (data) => {
         const resortsFile = await getJSONData('resorts');
-
-        data.id = resortsFile.resorts.length + 1;
 
         resortsFile.resorts.push(data);
 
@@ -76,6 +100,19 @@ const addResort = async (data) => {
 
         const filePath = path.join(__dirname, 'data', `resorts.json`);
         const dataString = JSON.stringify(resortsFile);
+        await fs.writeFile(filePath, dataString);
+};
+
+// Add all new tracks to JSON file
+const addTracks = async (tracks) => {
+        const tracksFile = await getJSONData('tracks');
+
+        tracks.forEach((track) => {
+                tracksFile.tracks.push(track);
+        });
+
+        const filePath = path.join(__dirname, 'data', `tracks.json`);
+        const dataString = JSON.stringify(tracksFile);
         await fs.writeFile(filePath, dataString);
 };
 
