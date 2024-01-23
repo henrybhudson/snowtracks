@@ -9,10 +9,8 @@ const displayResorts = (resorts) => {
 
         resorts.forEach((resort) => {
                 const element = document.createElement('div');
-                const imageName = resort.name.replaceAll(' ', '-');
-                console.log(imageName)
                 element.className = "resort-card";
-                element.style.backgroundImage = `url(../assets/resorts/${imageName}.png)`;
+                element.style.backgroundImage = `url(${resort.image})`;
                 element.innerHTML = `
                 <div class="resort-card-screen" id="${resort.id}" onclick="document.location.href='/resort/?id=${resort.id}';">
                         <div class="resort-title">${resort.name}</div>
@@ -26,6 +24,7 @@ const displayResorts = (resorts) => {
 
                 RESORTS_TABLE.appendChild(element);
         });
+
 }
 
 getResorts().then((resorts) => {

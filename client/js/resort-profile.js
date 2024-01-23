@@ -1,6 +1,9 @@
 // Deals with JavaScript on the singular resorts profile pages
 
-import { getResortAndTracks } from "./index.js";
+import { getResortAndTracks, addTrack } from "./index.js";
+
+// Global variable necessary to maintain full tracks list for searching
+var resortTracks = [];
 
 const displayResort = (resort) => {
         // Resort side info
@@ -11,8 +14,7 @@ const displayResort = (resort) => {
 
         document.querySelector('#track-search').setAttribute('placeholder', `Search tracks in ${resort.name}...`);
 
-        const resortImage = resort.name.replaceAll(' ', '-');
-        document.querySelector('.resort-image').setAttribute('src', `../assets/resorts/${resortImage}.png`)
+        document.querySelector('.resort-image').setAttribute('src', resort.image);
 
         // Load tracks
         const tracks = resort.tracks;
@@ -26,7 +28,6 @@ const displayResort = (resort) => {
 };
 
 const displayTracks = (tracks) => {
-        document.querySelector('.tracks-list').innerHTML = "";
         tracks.forEach((track) => {
                 // First get the HTML for the feature tags
                 var trackFeaturesHTML = "";
@@ -88,20 +89,69 @@ const displayTracks = (tracks) => {
 };
 
 // Add event listener to the track search input
-const addTrackInputListener = (tracks) => {
+const addTrackInputListener = () => {
         const trackInput = document.querySelector('#track-search');
         trackInput.addEventListener('input', () => {
-                const matchedTracks = tracks.filter((track) => {
+                const matchedTracks = resortTracks.filter((track) => {
                         return track.name.toUpperCase().includes(trackInput.value.trim().toUpperCase());
                 });
+                document.querySelector('.tracks-list').innerHTML = "";
                 displayTracks(matchedTracks);
         });
 }
 
+const addNewTrackListener = (resort) => {
+        const confirmButton = document.querySelector('.confirm-track-btn');
+
+        confirmButton.addEventListener('click', () => {
+                const name = document.querySelector('#track-name-input').value.trim();
+                const slope = document.querySelector('#difficulty-select').value;
+                const piste = document.querySelector('#piste-select').value;
+                const description = document.querySelector('#track-description-input').value.trim();
+                const length_km = parseFloat(document.querySelector('#track-length-input').value);
+                const time_mins = parseInt(document.querySelector('#track-time-input').value);
+                var features = [];
+
+                const SELECTED_FEATURES = document.querySelectorAll('.feature-selected');
+                SELECTED_FEATURES.forEach((feature) => {
+                        features.push(feature.getAttribute('value'));
+                });
+
+                const track = {
+                        name,
+                        slope,
+                        piste,
+                        description,
+                        length_km,
+                        time_mins,
+                        features,
+                        resort
+                };
+
+                addTrack(track);
+                displayTracks([track]);
+
+                // Push to resortTracks to add it to search domain
+                resortTracks.push(track);
+        });
+};
+
+const addFeatureEventListeners = () => {
+        const FEATURE_BUTTONS = document.querySelectorAll('.feature');
+
+        FEATURE_BUTTONS.forEach((button) => {
+                button.addEventListener('click', () => {
+                        button.classList.toggle('feature-selected');
+                });
+        });
+};
 
 getResortAndTracks().then((resort) => {
         if (resort) {
+                resortTracks = resort.tracks;
                 displayResort(resort);
-                addTrackInputListener(resort.tracks);
+                addTrackInputListener();
+                addNewTrackListener(resort.id);
+                addFeatureEventListeners();
         }
 });

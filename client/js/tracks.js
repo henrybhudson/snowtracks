@@ -1,4 +1,3 @@
-
 import { getTracks } from "./index.js";
 
 const displayTracks = (tracks) => {

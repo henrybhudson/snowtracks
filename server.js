@@ -9,19 +9,6 @@ app.use(bodyParser.urlencoded({
         extended: true
 }));
 app.use(express.json());
-/*
-TODO:
-So we have some API calls that SHOULD WORK.
-Now let's just try to call the getResorts API on the client side.
-Do this on page load.
-
-
-
-
-*/
-
-
-
 
 // Set route for page rendering
 app.use(express.static(__dirname + '/client'));
@@ -65,6 +52,15 @@ app.get('/api/tracks', async (req, res) => {
         res.json({ tracks });
 });
 
+app.post('/api/image', async (req, res) => {
+        const image = req.body;
+        console.log(1, image);
+
+        res.status(200).json({
+                status: 'success'
+        });
+});
+
 app.post('/api/resort', async (req, res) => {
         const resortData = req.body;
         const resorts = await getResorts();
@@ -72,9 +68,11 @@ app.post('/api/resort', async (req, res) => {
 
         // add track IDs and resortIDs
         resortData.id = resorts.length + 1;
-        const newTracks = resortData.tracks.slice();
+        var newTracks;
 
-        // console.log(newTracks)
+        if (resortData.tracks.length > 0) {
+                newTracks = resortData.tracks.slice();
+        }
 
         for (let i = 0; i < newTracks.length; i++) {
                 newTracks[i].id = tracks.length + i + 1;
@@ -93,13 +91,63 @@ app.post('/api/resort', async (req, res) => {
         }
 });
 
+// Add a new track to an existing resort
+app.post('/api/track', async (req, res) => {
+        const resortID = req.body.resort;
+        const track = req.body;
+
+        try {
+                const resorts = await getResorts();
+                const foundResort = resorts.find(resort => resort.id === resortID);
+
+                if (foundResort) {
+                        const tracks = await getTracks();
+                        track.id = tracks.length + 1;
+                        await addTracks([track]);
+
+                        foundResort.tracks.push(track.id);
+                        await updateResorts(resorts);
+                        res.status(200).json({
+                                status: 'success'
+                        });
+                } else {
+                        res.status(404).json({
+                                status: 'error',
+                                message: 'Resort not found'
+                        });
+                }
+        } catch (error) {
+                res.status(500).json({
+                        status: 'error',
+                        message: 'Internal server error'
+                });
+        }
+});
+
+const updateResorts = async (resorts) => {
+        const filePath = path.join(__dirname, 'data', 'resorts.json');
+        const dataString = JSON.stringify({ resorts });
+        await fs.writeFile(filePath, dataString);
+};
+
 // Add new resort to JSON file
 const addResort = async (data) => {
+        if (!(data.name && data.country && data.airport && data.description)) {
+                throw "Missing required information";
+        }
+
         const resortsFile = await getJSONData('resorts');
+        const newResort = {
+                name: data.name,
+                country: data.country,
+                airport: data.airport,
+                description: data.description,
+                id: data.id,
+                tracks: data.tracks,
+                image: data.image
+        };
 
-        resortsFile.resorts.push(data);
-
-        // Code to add image?
+        resortsFile.resorts.push(newResort);
 
         const filePath = path.join(__dirname, 'data', `resorts.json`);
         const dataString = JSON.stringify(resortsFile);
@@ -123,7 +171,6 @@ const addTracks = async (tracks) => {
 const getResort = async (id) => {
         const resorts = await getResorts();
         const resort = resorts.find(resort => resort.id == id)
-
 
         try {
                 const tracksList = resort.tracks;

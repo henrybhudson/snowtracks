@@ -4,6 +4,7 @@ import { addResort } from './index.js'
 // Global variable required to hold added tracks
 var newTracks = [];
 
+// Function to take track data and add it to the list of new tracks
 const addTrack = (track) => {
         const TRACKS_LIST = document.querySelector('.new-tracks-list');
 
@@ -13,6 +14,7 @@ const addTrack = (track) => {
                 TRACKS_LIST.innerHTML = '';
         }
 
+        // Create the HTML element
         const element = document.createElement('div');
         element.className = `new-track new-track-${track.slope.toLowerCase()}`;
 
@@ -32,9 +34,11 @@ const addTrack = (track) => {
         </div>
         `;
 
+        // Add the element to the list of tracks on the page
         TRACKS_LIST.appendChild(element);
 };
 
+// Creates an event listener the 'Add Track' button
 const addNewTrackListener = () => {
         const ADD_BTN = document.querySelector('.confirm-track-btn');
 
@@ -68,6 +72,22 @@ const addNewTrackListener = () => {
         });
 }
 
+const imageToURL = (image) => {
+        var reader = new FileReader();
+
+        return new Promise((resolve, reject) => {
+                reader.onload = () => {
+                        resolve(reader.result);
+                };
+                reader.readAsDataURL(image);
+        });
+}
+
+const handleImageUpload = async (image) => {
+        const imageContents = await imageToURL(image);
+        return imageContents;
+}
+
 const addNewResortListener = () => {
         const ADD_RESORT_BTN = document.querySelector('.confirm-resort-btn');
 
@@ -76,22 +96,39 @@ const addNewResortListener = () => {
                 const country = document.querySelector('#resort-country').value;
                 const airport = document.querySelector('#resort-airport').value;
                 const description = document.querySelector('#resort-description').value;
+                const image = document.querySelector('#resort-image').files[0];
 
-                // Image code?
+                const imageCode = await handleImageUpload(image);
+                console.log(imageCode)
 
                 const newResort = {
                         name,
                         country,
                         airport,
                         description,
-                        tracks: newTracks
+                        tracks: newTracks,
+                        image: imageCode
                 }
 
                 addResort(newResort).then((success) => {
                         if (success) {
                                 AppAlert('success', "Resort successfully added.")
+                        } else {
+                                AppAlert('error', 'EFEUBHBBFEIWBE')
                         }
-                })
+                });
+
+                if (name && country && airport && description && image) {
+                        addResort(newResort).then((success) => {
+                                if (success) {
+                                        AppAlert('success', "Resort successfully added.")
+                                }
+                        });
+                } else {
+                        // One of the fields is missing
+                        AppAlert('error', "Resort could not be added.")
+                }
+
         });
 };
 
@@ -125,13 +162,14 @@ const addTrackInputListener = () => {
 }
 
 const addFeatureEventListeners = () => {
+        // Enables the selecting and unselecting of features when adding a track
         const FEATURE_BUTTONS = document.querySelectorAll('.feature');
 
         FEATURE_BUTTONS.forEach((button) => {
                 button.addEventListener('click', () => {
                         button.classList.toggle('feature-selected');
-                })
-        })
+                });
+        });
 };
 
 addFeatureEventListeners();

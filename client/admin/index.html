@@ -41,8 +41,7 @@
                                 </div>
                                 <div class="nav-item nav-button hover-filter" id="edit-tracks-btn"><span
                                                 class="edit-icon"><i class="fa fa-pencil"></i></span><span
-                                                class="edit-text">Edit
-                                                Tracks</span>
+                                                class="edit-text">Add Resort</span>
                                 </div>
                                 <div class="mobile-nav" data-bs-toggle="modal" data-bs-target="#searchModal">
                                         <i class="fa fa-search"></i>&nbsp;&nbsp;Search
@@ -73,8 +72,8 @@
                                                         placeholder="A few sentences" type="text" rows="5"
                                                         required></textarea>
                                                 <div class="label">Resort Cover Image</div>
-                                                <input class="image-input" type="file" id="avatar" name="avatar"
-                                                        accept="image/png" required />
+                                                <input class="image-input" type="file" id="resort-image" name="avatar"
+                                                        accept="image/png" enctype="multipart/form-data" required />
                                         </div>
                                         <div class="right-panel">
                                                 <div class="right-panel-header">
@@ -185,7 +184,6 @@
                         </div>
                 </div>
         </div>
-        </div>
 
 
         <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
@@ -196,7 +194,7 @@
                                                 Search
                                                 <div class="nav-item mobile-edit-button nav-button hover-filter"
                                                         id="mobile-edit-btn">
-                                                        Edit Tracks
+                                                        Add Resort
                                                 </div>
                                         </h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"

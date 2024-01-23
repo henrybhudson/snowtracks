@@ -306,6 +306,7 @@ body {
         height: 500px;
         min-height: calc(100% - 2.5rem - 3rem);
         overflow: scroll;
+        padding-bottom: 2rem;
 }
 
 ::-webkit-scrollbar {
@@ -506,6 +507,29 @@ textarea {
         margin-left: auto;
         background-color: white;
         cursor: pointer;
+        white-space: nowrap;
+}
+
+.add-track-big:hover {
+        filter: brightness(0.9);
+}
+
+.add-track-big {
+        padding: 12px 18px;
+}
+
+.btn-container {
+        background-color: white;
+        height: 100%;
+        width: fit-content;
+        display: flex;
+        align-items: center;
+        padding-left: 1rem;
+}
+
+.fa-plus {
+        margin-top: -1px !important;
+        vertical-align: middle;
 }
 
 .label {

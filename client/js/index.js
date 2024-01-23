@@ -92,6 +92,38 @@ export const addResort = async (resort) => {
         }
 };
 
+export const addTrack = async (track) => {
+        try {
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 5000);
+
+                const response = await fetch(`http://127.0.0.1:8090/api/track/`, {
+                        method: 'POST',
+                        body: JSON.stringify(track),
+                        headers: {
+                                'content-type': 'application/json'
+                        },
+                        signal: controller.signal,
+                });
+
+                clearTimeout(timeoutId);
+
+                if (!response.ok) {
+                        throw new Error(`HTTP Error. Status: ${response.status}`);
+                }
+
+                AppAlert('success', 'The track was successfully added.');
+                return true;
+        } catch (e) {
+                if (e.name === 'AbortError') {
+                        AppAlert('error', 'Request timed out. Please check your connection.');
+                } else {
+                        AppAlert('error', 'Could not add track.');
+                }
+                return false;
+        }
+};
+
 document.querySelector('#resorts-search-btn').addEventListener('click', () => {
         const searchValue = document.querySelector('#resorts-search-input').value.trim();
         document.location.href = `/?search=${searchValue}`;
