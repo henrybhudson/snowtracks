@@ -1,3 +1,11 @@
+/*
+
+app-alert.js
+============
+This file exports the AppAlert function to display status messages on screen.
+
+*/
+
 const AppAlert = (status, message) => {
         const element = document.createElement('div')
         element.className = `alert alert-${status}`;

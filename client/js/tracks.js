@@ -1,5 +1,14 @@
+/*
+
+tracks.js
+=========
+Deals with various functionalities on the tracks listing page.
+
+*/
+
 import { getTracks } from "./index.js";
 
+// Display the tracks following a search
 const displayTracks = (tracks) => {
         document.querySelector('.tracks-list').innerHTML = "";
         tracks.forEach((track) => {

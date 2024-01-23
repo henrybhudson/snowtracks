@@ -1,3 +1,12 @@
+/*
+
+index.js
+========
+This file manages and exports all the requests to the server.
+It also deals with the navigaton buttons and inputs.
+
+*/
+
 import AppAlert from './app-alert.js';
 
 export const getResorts = async () => {
@@ -13,14 +22,30 @@ export const getResorts = async () => {
         }
 
         try {
+                // Create an AbortController to check for timeout
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 5000);
+
+                // Send request
                 const response = await fetch(`http://127.0.0.1:8090/api/resorts/?search=${search}`);
+
+                clearTimeout(timeoutId);
+
+                if (!response.ok) {
+                        throw new Error(`HTTP Error. Status: ${response.status}`);
+                }
+
+                // Get the data from the response
                 const data = await response.json();
                 const resorts = data.resorts;
 
-                // AppAlert('success', 'Found all resorts.')
                 return resorts;
         } catch (e) {
-                AppAlert('error', 'Could not find resorts.')
+                if (e.name === 'AbortError') {
+                        AppAlert('error', 'Request timed out. Please check your connection.');
+                } else {
+                        AppAlert('error', 'Could not find resorts.');
+                }
                 return null;
         }
 };
@@ -33,17 +58,32 @@ export const getResortAndTracks = async () => {
         }
 
         try {
+                // Create an AbortController to check for timeout
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 5000);
+
+                // Send request
                 const response = await fetch(`http://127.0.0.1:8090/api/resort/?id=${id}`);
+
+                clearTimeout(timeoutId);
+
+                if (!response.ok) {
+                        throw new Error(`HTTP Error. Status: ${response.status}`);
+                }
+
                 const data = await response.json();
 
                 if (response.status != 200) {
                         throw Error;
                 }
 
-                // AppAlert('success', 'Found the resort.')
                 return data;
         } catch (e) {
-                AppAlert('error', 'Could not find resort.')
+                if (e.name === 'AbortError') {
+                        AppAlert('error', 'Request timed out. Please check your connection.');
+                } else {
+                        AppAlert('error', 'Could not find this resort.');
+                }
                 return null;
         }
 }
@@ -60,16 +100,32 @@ export const getTracks = async () => {
         }
 
         try {
+                // Create an AbortController to check for timeout
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 5000);
+
+                // Send request
                 const response = await fetch(`http://127.0.0.1:8090/api/tracks/?search=${search}`);
+
+                clearTimeout(timeoutId);
+
+                if (!response.ok) {
+                        throw new Error(`HTTP Error. Status: ${response.status}`);
+                }
+
+                // Get data from response
                 const data = await response.json();
                 const tracks = data.tracks;
 
                 console.log(tracks)
 
-                // AppAlert('success', 'Found all resorts.')
                 return tracks;
         } catch (e) {
-                AppAlert('error', 'Could not find tracks.')
+                if (e.name === 'AbortError') {
+                        AppAlert('error', 'Request timed out. Please check your connection.');
+                } else {
+                        AppAlert('error', 'Could not find tracks.');
+                }
                 return null;
         }
 
@@ -77,6 +133,11 @@ export const getTracks = async () => {
 
 export const addResort = async (resort) => {
         try {
+                // Create an AbortController to check for timeout
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 5000);
+
+                // Send request
                 const response = await fetch(`http://127.0.0.1:8090/api/resort/`, {
                         method: 'POST',
                         body: JSON.stringify(resort),
@@ -85,18 +146,30 @@ export const addResort = async (resort) => {
                         },
                 });
 
+                clearTimeout(timeoutId);
+
+                if (!response.ok) {
+                        throw new Error(`HTTP Error. Status: ${response.status}`);
+                }
+
                 return true;
         } catch (e) {
-                AppAlert('error', 'Could not add resort.')
+                if (e.name === 'AbortError') {
+                        AppAlert('error', 'Request timed out. Please check your connection.');
+                } else {
+                        AppAlert('error', 'Could not add resort.');
+                }
                 return false;
         }
 };
 
 export const addTrack = async (track) => {
         try {
+                // Create an AbortController to check for timeout
                 const controller = new AbortController();
                 const timeoutId = setTimeout(() => controller.abort(), 5000);
 
+                // Send request
                 const response = await fetch(`http://127.0.0.1:8090/api/track/`, {
                         method: 'POST',
                         body: JSON.stringify(track),
@@ -123,6 +196,9 @@ export const addTrack = async (track) => {
                 return false;
         }
 };
+
+
+// Navigation buttons & inputs for searching or redirection
 
 document.querySelector('#resorts-search-btn').addEventListener('click', () => {
         const searchValue = document.querySelector('#resorts-search-input').value.trim();

@@ -1,3 +1,11 @@
+/*
+
+admin.js
+========
+This deals with various functionalities on the 'new resort' ('admin') page.
+
+*/
+
 import AppAlert from './app-alert.js';
 import { addResort } from './index.js'
 
@@ -42,7 +50,9 @@ const addTrack = (track) => {
 const addNewTrackListener = () => {
         const ADD_BTN = document.querySelector('.confirm-track-btn');
 
+        // Create the event listener for the button
         ADD_BTN.addEventListener('click', () => {
+                // Get all the data from the form
                 const name = document.querySelector('#track-name-input').value.trim();
                 const slope = document.querySelector('#difficulty-select').value;
                 const piste = document.querySelector('#piste-select').value;
@@ -51,12 +61,13 @@ const addNewTrackListener = () => {
                 const time_mins = parseInt(document.querySelector('#track-time-input').value);
                 var features = [];
 
+                // For each feature selected, at it to the features array
                 const SELECTED_FEATURES = document.querySelectorAll('.feature-selected');
                 SELECTED_FEATURES.forEach((feature) => {
                         features.push(feature.getAttribute('value'));
                 })
 
-
+                // Create the track object
                 const newTrack = {
                         name,
                         slope,
@@ -72,6 +83,7 @@ const addNewTrackListener = () => {
         });
 }
 
+// Converts an image to a base 64 string
 const imageToURL = (image) => {
         var reader = new FileReader();
 
@@ -83,15 +95,19 @@ const imageToURL = (image) => {
         });
 }
 
+// Calls imageToURL and returns the result
 const handleImageUpload = async (image) => {
         const imageContents = await imageToURL(image);
         return imageContents;
 }
 
+// Add an event listener to the 'Add Resort' button
 const addNewResortListener = () => {
         const ADD_RESORT_BTN = document.querySelector('.confirm-resort-btn');
 
+        // Add the event listener
         ADD_RESORT_BTN.addEventListener('click', async () => {
+                // Get data from the form
                 const name = document.querySelector('#resort-name').value;
                 const country = document.querySelector('#resort-country').value;
                 const airport = document.querySelector('#resort-airport').value;
@@ -99,8 +115,8 @@ const addNewResortListener = () => {
                 const image = document.querySelector('#resort-image').files[0];
 
                 const imageCode = await handleImageUpload(image);
-                console.log(imageCode)
 
+                // Create the resort object
                 const newResort = {
                         name,
                         country,
@@ -110,43 +126,38 @@ const addNewResortListener = () => {
                         image: imageCode
                 }
 
+                // Try adding the resort
                 addResort(newResort).then((success) => {
                         if (success) {
                                 AppAlert('success', "Resort successfully added.")
                         } else {
-                                AppAlert('error', 'EFEUBHBBFEIWBE')
+                                AppAlert('error', 'Resort could not be added.')
                         }
                 });
-
-                if (name && country && airport && description && image) {
-                        addResort(newResort).then((success) => {
-                                if (success) {
-                                        AppAlert('success', "Resort successfully added.")
-                                }
-                        });
-                } else {
-                        // One of the fields is missing
-                        AppAlert('error', "Resort could not be added.")
-                }
-
         });
 };
 
-// Live search functionality
+// Adds the live search functionality for the added tracks
 const addTrackInputListener = () => {
         const trackInput = document.querySelector('#track-search');
         const TRACKS_LIST = document.querySelector('.new-tracks-list');
 
+        // Add the event listener
         trackInput.addEventListener('input', () => {
+                // Clear the results space
                 TRACKS_LIST.innerHTML = '';
+
+                // Find the tracks that search the input
                 const matchedTracks = newTracks.filter((track) => {
                         return track.name.toUpperCase().includes(trackInput.value.trim().toUpperCase());
                 });
 
+                // Add the tracks to the viewport
                 matchedTracks.forEach((track) => {
                         addTrack(track);
                 })
 
+                // Deal with adding a 'No tracks found' message if there are no results 
                 if (TRACKS_LIST.childNodes.length == 0) {
                         const noTracksText = document.createElement('div');
                         noTracksText.className = 'smalltext';
@@ -161,8 +172,8 @@ const addTrackInputListener = () => {
         });
 }
 
+// Enables the selecting and unselecting of features when adding a track
 const addFeatureEventListeners = () => {
-        // Enables the selecting and unselecting of features when adding a track
         const FEATURE_BUTTONS = document.querySelectorAll('.feature');
 
         FEATURE_BUTTONS.forEach((button) => {
@@ -172,6 +183,7 @@ const addFeatureEventListeners = () => {
         });
 };
 
+// Call all the add event listener functions
 addFeatureEventListeners();
 addNewTrackListener();
 addNewResortListener();

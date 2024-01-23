@@ -1,12 +1,20 @@
-// Deals with JavaScript on the main resorts page
+/*
+
+resorts.js
+==========
+Deals with various functionalities on the main resorts page
+
+*/
 
 import { getResorts } from "./index.js";
 
+// Display the resorts on the page
 const displayResorts = (resorts) => {
         // Firstly clear the contents of the table
         const RESORTS_TABLE = document.querySelector('.resorts-table');
         RESORTS_TABLE.innerHTML = "";
 
+        // For each resort, create and append an HTML element
         resorts.forEach((resort) => {
                 const element = document.createElement('div');
                 element.className = "resort-card";
@@ -27,6 +35,7 @@ const displayResorts = (resorts) => {
 
 }
 
+// Get the resorts and then display them
 getResorts().then((resorts) => {
         if (resorts) {
                 displayResorts(resorts);

@@ -241,20 +241,19 @@ const getTracks = async (all = true, tracksList = []) => {
 
 // Reusable function to open a JSON file and extract the data
 const getJSONData = async (entity) => {
+        // Create the file path
         const filePath = path.join(__dirname, 'data', `${entity}.json`);
+
+        // Get the data and parse the JSON
         const data = await fs.readFile(filePath, 'utf8');
         const jsonData = JSON.parse(data);
 
         return jsonData;
 };
 
-app.get('/', async (req, res) => {
+app.get('/', async (req, res) => { });
 
-});
-
-// getResortsByName("Villars")
-
-
+// Connect
 app.listen(8090, () => {
         console.log('✨ Server running');
 });

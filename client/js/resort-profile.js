@@ -1,4 +1,10 @@
-// Deals with JavaScript on the singular resorts profile pages
+/*
+
+resort-profile.js
+=================
+This deals with various functionalities on the 'resort profile' page that shows all the details about a specific resort.
+
+*/
 
 import { getResortAndTracks, addTrack } from "./index.js";
 
