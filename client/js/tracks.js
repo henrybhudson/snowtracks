@@ -34,7 +34,7 @@ const displayTracks = (tracks) => {
                                 case "Slalom":
                                         featureIcon += "flag-checkered";
                                         break;
-                        };
+                        }
                         // Create the HTML
                         trackFeaturesHTML += `
                         <i data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="${feature}" data-bs-custom-class="tooltip" class="fa fa-${featureIcon}"></i>
@@ -80,7 +80,8 @@ getTracks().then((tracks) => {
 
                 // Intialise the tooltips that have been added
                 var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-                var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                tooltipTriggerList.map(function (tooltipTriggerEl) {
+                        /* global bootstrap */
                         return new bootstrap.Tooltip(tooltipTriggerEl)
                 })
         }

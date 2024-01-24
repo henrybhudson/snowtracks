@@ -87,7 +87,7 @@ const addNewTrackListener = () => {
 const imageToURL = (image) => {
         var reader = new FileReader();
 
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
                 reader.onload = () => {
                         resolve(reader.result);
                 };

@@ -2,7 +2,7 @@
 
 resorts.js
 ==========
-Deals with various functionalities on the main resorts page
+Deals with various functionalities on the main resorts page.
 
 */
 
